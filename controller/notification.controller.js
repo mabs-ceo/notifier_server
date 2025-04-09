@@ -27,8 +27,8 @@ async function createNotifications(req, res) {
         // Extract the notification details from the request body
         const { name, postal,dueDate,contact } = req.body;
      console.log('create Notification')
-        // const newNotification = new Notification({ name, postal,dueDate ,contact });
-        // await newNotification.save();
+        const newNotification = new Notification({ name, postal,dueDate ,contact });
+        await newNotification.save();
       const response = await sendNotification({title:'Janaza Notification',body:'There is a new notification.'});
         console.log(response);
         res.status(201).json(newNotification);
