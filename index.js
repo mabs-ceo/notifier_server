@@ -45,7 +45,7 @@ app.use("/api/v1/auth", require("./routes/notification.routes"));
 app.use("/api/v1/notifications", require("./routes/notification.routes"));
 app.use("/api/v1/token", require("./routes/token.routes"));
 
-app.use("*/", (req,res)=>{
+app.use("/", (req,res)=>{
     res.send("Welcome to Janaza Notification API")
 });
 app.listen(port, () => {
