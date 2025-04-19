@@ -15,11 +15,13 @@ const app = express();
 const corsOptions = {
   origin: [
     'https://ummahnotify.com', // Allow this domain
-    'https://notifier-server-0rtz.onrender.com/', // Allow this domain
+    'https://notifier-server-0rtz.onrender.com', // Allow this domain,
+    'http://localhost:5173'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   credentials: true, // Allow credentials like cookies to be sent
+  
 };
 
 // Apply CORS middleware
@@ -45,6 +47,6 @@ app.use("/api/v1/notifications",verifyLimiter ,require("./routes/notification.ro
 app.use("/api/v1/token", verifyLimiter,require("./routes/token.routes"));
 
 app.use("/", (req,res)=>{
-    res.send("Welcome to Janaza Notification API")
+    res.send("Welcome to UmmahNotify API")
 });
 app.listen(port);
