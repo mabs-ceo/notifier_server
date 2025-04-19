@@ -5,7 +5,7 @@ const tokenSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    subscribedFor:{
+    topic:{
         type:String,
         enum: ['janaza'],
         required: true,
