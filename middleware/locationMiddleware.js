@@ -30,7 +30,7 @@ async function checkGeoLocation(ip) {
 async function locationMiddleware(req, res, next) {
   const ip = getClientIp(req);
   const geo = await checkGeoLocation(ip);
-
+console.log(geo)
   if (geo && geo.countryCode === 'SG') {
     req.geo = geo;
     return next();
