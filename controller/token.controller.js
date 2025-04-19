@@ -50,7 +50,7 @@ async function unSubscribe(req, res) {
         await Token.deleteOne({ token });
         res.status(200).json({ status:'OK',code:200, message: 'Token deleted successfully' });
     } catch (error) {
-        console.error('Error deleting token:', error);
+        // console.error('Error deleting token:', error);
         res.status(500).json({ status:'failed',code:500, message: 'Error deleting token', error });
     }
 }

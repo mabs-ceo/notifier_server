@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 
 const dotenv = require('dotenv');
 const connectDB = require('./configs/db');
+const { locationMiddleware } = require('./middleware/locationMiddleware');
 
 
 dotenv.config();
@@ -13,10 +14,10 @@ const app = express();
 
 const corsOptions = {
   origin: [
-    'http://localhost:5173',
+    // 'http://localhost:5173',
     'https://ummahnotify.com',
-    'https://www.ummahnotify.com', 
-  
+    'https://www.ummahnotify.com', // 🔥 this is required!
+    'https://notifier-server-0rtz.onrender.com'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -26,6 +27,8 @@ const corsOptions = {
 // Apply CORS middleware
 app.use(cors(corsOptions));
 app.use(express.json());
+
+
 
 app.use(express.urlencoded({ extended: true }));    
 // Limit each IP to 10 requests per 10 minutes
@@ -42,8 +45,9 @@ const port = process.env.PORT || 3000;
 
 
 
-app.use("/api/v1/notifications",verifyLimiter ,require("./routes/notification.routes"));
-app.use("/api/v1/token", verifyLimiter,require("./routes/token.routes"));
+app.use("/api/v1/check-location",locationMiddleware,verifyLimiter ,require("./routes/checklocation.route"));
+app.use("/api/v1/notifications",locationMiddleware,verifyLimiter ,require("./routes/notification.routes"));
+app.use("/api/v1/token", locationMiddleware,verifyLimiter,require("./routes/token.routes"));
 
 app.use("/", (req,res)=>{
     res.send("Welcome to UmmahNotify API")
