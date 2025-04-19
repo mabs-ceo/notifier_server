@@ -11,17 +11,16 @@ dotenv.config();
 connectDB()
 const app = express();
 
-// CORS configuration
 const corsOptions = {
   origin: [
-    'https://ummahnotify.com', // Allow this domain
-    'https://notifier-server-0rtz.onrender.com', // Allow this domain,
-    'http://localhost:5173'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-  credentials: true, // Allow credentials like cookies to be sent
+    'http://localhost:5173',
+    'https://ummahnotify.com',
+    'https://www.ummahnotify.com', 
   
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 };
 
 // Apply CORS middleware
